@@ -1,10 +1,16 @@
-.enrolList
-{
-    margin-left: auto;
-    margin-right: auto;
-    width: 450px;
+.formulario {
+    border: 2px solid #ddd; 
+    padding: 20px;
+    width: 300px; 
+    margin: auto;
+    background-color: aquamarine;
+  }
+.texto-rojo {
+    color: red;
 }
-div[role="checkbox"]
-{
-    display: none;
+.boton-verde{
+  background-color: green;
+}
+.boton-rojo{
+  background-color: red;
 }
