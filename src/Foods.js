@@ -1,16 +1,20 @@
-import React, {  useState } from "react";
+import React, {  useContext, useState } from "react";
 import "./Foods.css";
 import FoodOrder from "./FoodOrder";
-const Foods = (props) => {
+import { foodItemsContext } from "./App";
+const Foods = () => {
   const [selectedFood, setSelectedFood] = useState("");
+  const datos = useContext(foodItemsContext)
 
   const handleSelect = (event) => {
     setSelectedFood(
-      props.foodItems.find((item) => {
+      datos.menuItems.find((item) => {
         return item.id === parseInt(event.currentTarget.dataset.id);
       })
     );
   };
+
+  const datosCompartidos = {selectedFood: selectedFood, returnToMenu: () => setSelectedFood(""), datosItems: datos}
 
   return (
     <>
@@ -18,7 +22,7 @@ const Foods = (props) => {
         <div>
           <h4 className="foodTitle">Choose from our Menu</h4>
           <ul className="ulFoods">
-            {props.foodItems.map((item) => {
+            {datos.menuItems.map((item) => {
               return (
                 <li
                   key={item.id}
@@ -42,10 +46,9 @@ const Foods = (props) => {
         </div>
       )}
       {selectedFood && (
-        <FoodOrder
-          food={selectedFood}
-          returnToMenu={() => setSelectedFood("")}
-        />
+        <foodItemsContext.Provider value={datosCompartidos}>
+        <FoodOrder/>
+        </foodItemsContext.Provider>
       )}
     </>
   );

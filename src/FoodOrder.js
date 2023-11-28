@@ -3,30 +3,32 @@ import "./FoodOrder.css";
 import { useContext } from "react";
 import { foodItemsContext } from "./App";
 
-const FoodOrder = (props) => {
-  const selectedFood = props.food;
+const FoodOrder = () => {
+  const datos = useContext(foodItemsContext)
+  const selectedFood = datos.selectedFood;
   const [quantity, setQuantity] = useState(1);
-  const [totalAmount, setTotalAmount] = useState(selectedFood.price);
+  const [totalAmount, setTotalAmount] = useState(datos.selectedFood.price);
   const [isOrdered, setIsOrdered] = useState(false);
-  const menuItems = useContext(foodItemsContext);
+  
   const handleQuantityChange = (event) => {
-    setTotalAmount(selectedFood.price * event.target.value);
+    setTotalAmount(datos.selectedFood.price * event.target.value);
     setQuantity(event.target.value);
   };
 
+  
   const handleClick = () => {
     setIsOrdered(true); //show message
-
+    
   };
 
 
   return (
     <>
-      <h4 className="selFoodTitle">{selectedFood.name}</h4>
+      <h4 className="selFoodTitle">{datos.selectedFood.name}</h4>
       
       <ul className="ulFoodDetails">
         <li>
-          <p className="selFoodDesc">{selectedFood.desc}</p>
+          <p className="selFoodDesc">{datos.selectedFood.desc}</p>
         </li>
         <li>
           <p className="selFoodPrice">{totalAmount}$</p>
@@ -68,7 +70,7 @@ const FoodOrder = (props) => {
           <button className="btn btnOrder" onClick={handleClick}>
             Submit Order
           </button>
-          <button className="btn btnReturnMenu" onClick={props.returnToMenu}>
+          <button className="btn btnReturnMenu" onClick={datos.returnToMenu}>
             Return to Menu
           </button>
         </li>

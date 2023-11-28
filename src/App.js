@@ -39,9 +39,10 @@ const App = () => {
     },
   ]);
 
+  const datosCompartidos = {menuItems: menuItems,setMenuItems: setMenuItems}
 
   return (
-    <foodItemsContext.Provider value={menuItems}>
+    <foodItemsContext.Provider value={datosCompartidos}>
     <div className="App">
       
         
@@ -62,10 +63,10 @@ const App = () => {
         
       
       
-        <Foods
-          foodItems={menuItems}
+        <Foods/>
+          
         
-        ></Foods>
+       
       
     </div>
     </foodItemsContext.Provider>
